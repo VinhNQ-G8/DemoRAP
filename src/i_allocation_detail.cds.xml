@@ -2,16 +2,15 @@
 <abapGit version="v1.0.0" serializer="LCL_OBJECT_CDS" serializer_version="v1.0.0">
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
-   <DDLSOURCENAME>I_ALLOCATION_DETAIL_D</DDLSOURCENAME>
+   <DDLSOURCENAME>I_ALLOCATION_DETAIL</DDLSOURCENAME>
    <DDLSOURCE>
-@EndUserText.label: 'Allocation Detail Draft'
+@EndUserText.label: 'Allocation Detail'
 @AccessControl.authorizationCheck: #CHECK
 @Metadata.allowExtensions: true
 @ObjectModel.semanticKey: ['AllocationId', 'ItemNo']
 @ObjectModel.createEnabled: true
 @ObjectModel.deleteEnabled: true
 @ObjectModel.updateEnabled: true
-@ObjectModel.draftEnabled: true
 @ObjectModel.representativeKey: 'AllocationId'
 @Search.searchable: true
 @UI: {
@@ -48,8 +47,8 @@
     }
   ]
 }
-define view I_AllocationDetail_D
-  as draft from ZALLOCATION_DETAIL_D
+define view I_AllocationDetail
+  as select from ZALLOCATION_DETAIL
 {
   key AllocationId,
   key ItemNo,
@@ -58,10 +57,7 @@ define view I_AllocationDetail_D
       Amount,
       Currency,
       TaxRate,
-      Note,
-      DraftEntityCreationDate,
-      DraftEntityLastChangeDate,
-      DraftAdministrativeData
+      Note
 }
    </DDLSOURCE>
   </asx:values>

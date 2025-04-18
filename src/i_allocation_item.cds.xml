@@ -2,16 +2,15 @@
 <abapGit version="v1.0.0" serializer="LCL_OBJECT_CDS" serializer_version="v1.0.0">
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
-   <DDLSOURCENAME>I_ALLOCATION_ITEM_D</DDLSOURCENAME>
+   <DDLSOURCENAME>I_ALLOCATION_ITEM</DDLSOURCENAME>
    <DDLSOURCE>
-@EndUserText.label: 'Allocation Item Draft'
+@EndUserText.label: 'Allocation Item'
 @AccessControl.authorizationCheck: #CHECK
 @Metadata.allowExtensions: true
 @ObjectModel.semanticKey: ['AllocationId', 'ItemNo', 'AllocationItemNo']
 @ObjectModel.createEnabled: true
 @ObjectModel.deleteEnabled: true
 @ObjectModel.updateEnabled: true
-@ObjectModel.draftEnabled: true
 @ObjectModel.representativeKey: 'AllocationId'
 @Search.searchable: true
 @UI: {
@@ -66,34 +65,8 @@
     }
   ]
 }
-define view I_AllocationItem_D
-  as draft from ZALLOCATION_ITEM_D
-{
-  key AllocationId,
-  key ItemNo,
-  key AllocationItemNo,
-      Material,
-      Quantity,
-      Unit,
-      Amount,
-      Currency,
-      DraftEntityCreationDate,
-      DraftEntityLastChangeDate,
-      DraftAdministrativeData
-}
-   </DDLSOURCE>
-   <DDLSOURCE>
-@EndUserText.label: 'Allocation Item Draft'
-@AccessControl.authorizationCheck: #CHECK
-@ObjectModel: {
-  createEnabled: true,
-  updateEnabled: true,
-  deleteEnabled: true,
-  draftEnabled: true,
-  semanticKey: ['AllocationId', 'ItemNo', 'AllocationItemNo']
-}
-define view I_AllocationItem_D
-  as draft of I_AllocationItem
+define view I_AllocationItem
+  as select from ZALLOCATION_ITEM
 {
   key AllocationId,
   key ItemNo,
@@ -106,12 +79,7 @@ define view I_AllocationItem_D
       @ObjectModel.dataCategory: #AMOUNT
       @ObjectModel.currency: Currency
       Amount,
-      Currency,
-      DraftEntityCreationDate,
-      DraftEntityLastChangeDate,
-      DraftAdministrativeData,
-      _Header : redirected to parent I_AllocationHeader_D,
-      _Detail : redirected to parent I_AllocationDetail_D
+      Currency
 }
    </DDLSOURCE>
   </asx:values>
