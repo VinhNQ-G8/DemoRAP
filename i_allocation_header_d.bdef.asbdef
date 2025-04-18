@@ -1,0 +1,29 @@
+managed implementation in class zbp_i_allocation_header_d unique;
+strict ( 2 );
+
+define behavior for I_AllocationHeader_D alias AllocationHeader
+persistent table zallocation_header_d
+draft table zallocation_header_d
+lock master
+authorization master ( instance )
+{
+  create;
+  update;
+  delete;
+
+  draft action Edit;
+  draft action Activate;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+
+  field ( readonly ) AllocationId;
+  field ( mandatory ) InvoiceNumber;
+  field ( mandatory ) PostingDate;
+
+  association _Detail { create; }
+  association _Item { create; }
+
+  action allocateByAmount result [1] $self;
+  action allocateByQuantity result [1] $self;
+} 

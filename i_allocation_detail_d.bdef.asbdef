@@ -1,0 +1,27 @@
+managed implementation in class zbp_i_allocation_detail_d unique;
+strict ( 2 );
+
+define behavior for I_AllocationDetail_D alias AllocationDetail
+persistent table zallocation_detail_d
+draft table zallocation_detail_d
+lock dependent by _Header
+authorization dependent by _Header
+{
+  create;
+  update;
+  delete;
+
+  draft action Edit;
+  draft action Activate;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+
+  field ( readonly ) AllocationId;
+  field ( readonly ) ItemNo;
+  field ( mandatory ) Amount;
+  field ( mandatory ) Currency;
+
+  association _Header { create; }
+  association _Item { create; }
+} 

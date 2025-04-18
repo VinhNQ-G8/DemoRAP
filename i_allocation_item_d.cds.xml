@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_CDS" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DDLSOURCENAME>I_ALLOCATION_ITEM_D</DDLSOURCENAME>
+   <DDLSOURCE>
+@EndUserText.label: 'Allocation Item Draft'
+@AccessControl.authorizationCheck: #CHECK
+@Metadata.allowExtensions: true
+@ObjectModel.semanticKey: ['AllocationId', 'ItemNo', 'AllocationItemNo']
+@ObjectModel.createEnabled: true
+@ObjectModel.deleteEnabled: true
+@ObjectModel.updateEnabled: true
+@ObjectModel.draftEnabled: true
+@ObjectModel.representativeKey: 'AllocationId'
+@Search.searchable: true
+@UI: {
+  headerInfo: {
+    typeName: 'Allocation Item',
+    typeNamePlural: 'Allocation Items',
+    title: {
+      type: #STANDARD,
+      label: 'Allocation Item',
+      value: 'AllocationId'
+    }
+  },
+  selectionFields: ['AllocationId', 'ItemNo', 'AllocationItemNo', 'Material'],
+  lineItem: [
+    {
+      position: 10,
+      importance: #HIGH,
+      label: 'Allocation ID'
+    },
+    {
+      position: 20,
+      importance: #HIGH,
+      label: 'Item Number'
+    },
+    {
+      position: 30,
+      importance: #HIGH,
+      label: 'Allocation Item Number'
+    },
+    {
+      position: 40,
+      importance: #HIGH,
+      label: 'Material'
+    }
+  ],
+  identification: [
+    {
+      position: 10,
+      label: 'Allocation ID'
+    },
+    {
+      position: 20,
+      label: 'Item Number'
+    },
+    {
+      position: 30,
+      label: 'Allocation Item Number'
+    },
+    {
+      position: 40,
+      label: 'Material'
+    }
+  ]
+}
+define view I_AllocationItem_D
+  as draft from ZALLOCATION_ITEM_D
+{
+  key AllocationId,
+  key ItemNo,
+  key AllocationItemNo,
+      Material,
+      Quantity,
+      Unit,
+      Amount,
+      Currency,
+      DraftEntityCreationDate,
+      DraftEntityLastChangeDate,
+      DraftAdministrativeData
+}
+   </DDLSOURCE>
+  </asx:values>
+ </asx:abap>
+</abapGit> 
